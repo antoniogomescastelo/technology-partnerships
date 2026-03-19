@@ -1,0 +1,329 @@
+name: PARTNER_DEALS_V
+tables:
+  - name: PARTNER_DEALS
+    description: The table contains records of sales deals associated with business partners. Each record represents a single opportunity and includes details about the partner's classification, hierarchy, and geographic scope, as well as financial metrics such as annual recurring revenue in multiple currencies. Records also capture deal lifecycle information including forecast status, contract timing, and pipeline stage.
+    base_table:
+      database: TPC_DS
+      schema: PARTNERS
+      table: PARTNER_DEALS
+    dimensions:
+      - name: ACCOUNT_TYPE
+        description: The type of account associated with a partner deal.
+        expr: ACCOUNT_TYPE
+        data_type: VARCHAR
+        sample_values:
+          - Customer
+          - Former Services Partner
+          - Former Customer
+      - name: ENGAGEMENT_DETAIL
+        description: Detailed notes describing the nature and current status of partner engagement activities.
+        expr: ENGAGEMENT_DETAIL
+        data_type: VARCHAR
+        sample_values:
+          - Aligned with BDC AE and our account team. Providing support for Collibra directly with client as well.
+          - Opplane deeply engrained at HD, driving Collibra success, use case discovery.
+          - Accenture works extensively at Cigna, originally on the assessment, recommending Collibra and working on Collibra afterwards, creating Cigna?s data policy foundation and now aligned with Cigna?s AI COE on AI Gov case study plus Cigna HR on their DG needs.
+      - name: FISCAL_QUARTER
+        description: The fiscal quarter in which the partner deal occurred.
+        expr: FISCAL_QUARTER
+        data_type: VARCHAR
+        sample_values:
+          - Q1-2026
+          - Q4-2025
+          - Q3-2025
+      - name: NEW_ARR_CONVERTED_CURRENCY
+        description: The currency used for converted new annual recurring revenue values.
+        expr: NEW_ARR_CONVERTED_CURRENCY
+        data_type: VARCHAR
+        sample_values:
+          - USD
+      - name: OPP_TYPE
+        description: The type of opportunity associated with a partner deal.
+        expr: OPP_TYPE
+        data_type: VARCHAR
+        sample_values:
+          - Existing
+          - Renewal
+          - New
+      - name: OPPORTUNITY_ID
+        description: The unique identifier associated with a sales opportunity.
+        expr: OPPORTUNITY_ID
+        data_type: VARCHAR
+        sample_values:
+          - 006Qu00000MXGHT
+          - 006Qu00000PM034
+          - 0066M00001B8UFk
+      - name: PAM_NOTES
+        description: Chronological notes and updates logged by the Partner Account Manager regarding partner activities, meetings, and deal progress.
+        expr: PAM_NOTES
+        data_type: VARCHAR
+        sample_values:
+          - '21OCT25: SAP update: Pankaj, GAM SAP had presented Collibra overview to Ooredoo Data Governance team and it was recommended solution for Data Quality along with SAP Master Data Governance workshop that we have presented to Ooredoo team ( mainly data quality and master data governance team). Plus, Collibra was recommended by SAP implementation colleagues as well. It was presented to Nilo and Master Data Governance & Data Quality team Ooredoo are undergoing a massive transformation to S/4HANA RISE from Oracle along with a lot of other applications Ariba, Success Factors, Supply Chain, Signavio, etc. They started in 2022. It?s one of our biggest accounts from revenue perspective in Qatar. They already have Datasphere & SAC and are looking at moving to BDC. We have a big team working on the ground with them. 18OCT25: Cynthia / GCP guiding us around MP and procurement complexity at Ooredoo: This email summarizes the challenges and requests clarification on the Ooredoo Group''s preferred procurement structure to enable the transaction to go through the Google Marketplace. Cynthia acknowledges Ooredoo''s preference for direct procurement, likely due to the complexity of cross-charging licenses across its various Operating Companies (OpCos). The core of the email is a request for clarification on five key points regarding Ooredoo''s transaction structure: Transaction Volume: Is Ooredoo planning a single group transaction or individual transactions by each OpCo? Pricing Impact: Will procuring OpCo by OpCo (using individual billing IDs) alter the negotiated license price? Timing & Pricing Guarantee: If OpCos procure at different times, can the same pricing structure be guaranteed for later purchases? Master Agreement: Can the Master Framework Agreement be signed with the Group, while individual OpCo license procurement is handled through the Marketplace? Cynthia provides context on the procurement mechanism (Ooredoo Qatar can transact directly; other OpCos require a partner/sub-billing ID) and suggests negotiating the partner''s margin against a 10% discount as a possible solution to maintain the desired price. 12Sept25: connected with the sales team. Ooredoo cloud choice is GCP. GCP Team provided few elements around strategy, org chart and their currect / future agreement'
+          - '7/24/25 BK: Met w/Infosys: Multiple folks working with Jane''s team moving data to Snowflake. Recently held a workshop with MS (very AI driven) who asked for help to capture Data Lineage and inquired if Collibra Protect will meet their needs (Infosys said yes). According to Infosys, MS is very focused on modernization away from IBM to one platform and seems strongly committed to Collibra. Infosys has continued to reinforce their support for Collibra and offer assistance/guidance around it to MS. Aaman will follow OTR and confirm w/MS is not seriously considering other tools.'
+      - name: PARTNER_NAME
+        description: The name of the partner organization associated with the deal.
+        expr: PARTNER_NAME
+        data_type: VARCHAR
+        sample_values:
+          - Neos Ltd
+          - Aekiden
+          - SAP SE (TP)
+      - name: PARTNER_TIER
+        description: The tier or level assigned to a partner within a partner program.
+        expr: PARTNER_TIER
+        data_type: VARCHAR
+        sample_values:
+          - Gold
+          - Bronze
+          - '#N/A'
+      - name: PARTNER_TYPE
+        description: The type or category of the partner associated with the deal.
+        expr: PARTNER_TYPE
+        data_type: VARCHAR
+        sample_values:
+          - '#N/A'
+          - Technology Partner
+          - Services Partner
+      - name: REGION
+        description: The geographic region associated with the partner deal.
+        expr: REGION
+        data_type: VARCHAR
+        sample_values:
+          - APAC
+          - EMEA
+          - Americas
+      - name: STAGE
+        description: The current stage of the partner deal in the sales pipeline.
+        expr: STAGE
+        data_type: VARCHAR
+        sample_values:
+          - Closed Won
+      - name: TERRITORY
+        description: The sales or operational territory code associated with a partner deal.
+        expr: TERRITORY
+        data_type: VARCHAR
+        sample_values:
+          - FSA
+          - CTL
+          - FED
+    time_dimensions:
+      - name: CLOSE_DATE
+        description: The date on which a partner deal was closed.
+        expr: CLOSE_DATE
+        data_type: DATE
+        sample_values:
+          - '0026-02-02'
+          - '0025-12-19'
+          - '0025-09-05'
+      - name: CONTRACT_END_DATE
+        description: The date on which a partner deal contract ends.
+        expr: CONTRACT_END_DATE
+        data_type: DATE
+        sample_values:
+          - '0028-11-14'
+          - '0026-11-02'
+          - '0027-02-02'
+    facts:
+      - name: NEW_ARR_CONVERTED
+        description: The new Annual Recurring Revenue converted into a standard currency for partner deals.
+        expr: NEW_ARR_CONVERTED
+        data_type: NUMBER
+        sample_values:
+          - '-5008.08'
+          - '117585.67'
+          - '3784.08'
+    foreign_keys:
+      - fkey_columns:
+          - OPPORTUNITY_ID
+        pkey_table:
+          database: TPC_DS
+          schema: PARTNERS
+          table: PARTNER_SOURCED_PIPELINE
+        pkey_columns:
+          - OPPORTUNITY_ID
+  - name: PARTNER_SOURCED_PIPELINE
+    description: The table contains records of sales opportunities sourced through business partners. Each record represents a single opportunity and includes details about the partner's identity, tier, and type, as well as opportunity-level information such as revenue figures, forecast data, probability, and expected close date across different regions.
+    base_table:
+      database: TPC_DS
+      schema: PARTNERS
+      table: PARTNER_SOURCED_PIPELINE
+    dimensions:
+      - name: MANAGER_FORECAST
+        description: The sales manager's forecast classification for a partner-sourced pipeline opportunity.
+        expr: MANAGER_FORECAST
+        data_type: VARCHAR
+        sample_values:
+          - Best Case
+          - Closed Won
+          - Forecast
+      - name: NEW_ARR_CURRENCY
+        description: The currency in which new annual recurring revenue is reported.
+        expr: NEW_ARR_CURRENCY
+        data_type: VARCHAR
+        sample_values:
+          - USD
+      - name: OPP_TYPE
+        description: The type of opportunity associated with the partner-sourced pipeline.
+        expr: OPP_TYPE
+        data_type: VARCHAR
+        sample_values:
+          - New
+          - Renewal
+          - Existing
+      - name: OPPORTUNITY_ID
+        description: Unique identifier for a sales opportunity.
+        expr: OPPORTUNITY_ID
+        data_type: VARCHAR
+        sample_values:
+          - 0066M00001Gdpi8
+          - 0066M000019sGFR
+          - 006Qu00000CbA6L
+      - name: OPPORTUNITY_NAME
+        description: The name of a sales opportunity, typically including the partner or organization name along with relevant business context such as deal type and date.
+        expr: OPPORTUNITY_NAME
+        data_type: VARCHAR
+        sample_values:
+          - Corning Incorporated - New Business (2025-06-26)
+          - Knights of Columbus - Data Modernization
+          - 'Toyota Daihatsu Engineering & Manufacturing - NB: DGC +DQ'
+      - name: PARTNER_ACCOUNT_OWNER
+        description: The name of the account owner associated with the partner.
+        expr: PARTNER_ACCOUNT_OWNER
+        data_type: VARCHAR
+        sample_values:
+          - Manuel Cañada Cornejo
+          - John Policaro
+          - Buzz Kleinert
+      - name: PARTNER_NAME
+        description: The name of the partner organization associated with the sourced pipeline.
+        expr: PARTNER_NAME
+        data_type: VARCHAR
+        sample_values:
+          - Capgemini (Parent)
+          - PwC (Parent)
+          - Neos Ltd
+      - name: PARTNER_TIER
+        description: The tier or level of the partner within the partner program.
+        expr: PARTNER_TIER
+        data_type: VARCHAR
+        sample_values:
+          - Silver
+          - Gold
+          - '0'
+      - name: PARTNER_TYPE
+        description: The type or category of the partner associated with the pipeline record.
+        expr: PARTNER_TYPE
+        data_type: VARCHAR
+        sample_values:
+          - '#N/A'
+          - Services Partner
+          - Technology Partner
+      - name: PROBABILITY
+        description: The estimated probability of a partner-sourced pipeline opportunity closing successfully expressed as a percentage.
+        expr: PROBABILITY
+        data_type: NUMBER
+        sample_values:
+          - '10'
+          - '100'
+          - '40'
+      - name: REGION
+        description: The geographic region associated with the partner sourced pipeline entry.
+        expr: REGION
+        data_type: VARCHAR
+        sample_values:
+          - Americas
+          - EMEA
+          - APAC
+      - name: ROLE
+        description: The role or roles associated with a partner in the sales pipeline, which may include multiple designations.
+        expr: ROLE
+        data_type: VARCHAR
+        sample_values:
+          - Co-sell; Services
+          - Advisory
+          - Advisory; Co-sell
+      - name: SOURCE
+        description: The source or origin classification of the partner-referred pipeline opportunity.
+        expr: SOURCE
+        data_type: VARCHAR
+        sample_values:
+          - Partner Referred Opp - Referral Fee
+          - Partner Referred Opp - No Referral Fee
+          - Partner Referred Opp - Partner Investment Fund
+    time_dimensions:
+      - name: CLOSE_DATE
+        description: The anticipated or actual date on which a partner-sourced pipeline deal or opportunity is expected to close.
+        expr: CLOSE_DATE
+        data_type: DATE
+        sample_values:
+          - '0026-06-26'
+          - '0021-02-18'
+          - '0026-03-26'
+      - name: CREATED_DATE
+        description: The date on which the partner sourced pipeline record was created.
+        expr: CREATED_DATE
+        data_type: DATE
+        sample_values:
+          - '0024-05-01'
+          - '0026-02-03'
+          - '0023-03-13'
+    facts:
+      - name: ARR_DELTA
+        description: The change in Annual Recurring Revenue associated with partner-sourced pipeline.
+        expr: ARR_DELTA
+        data_type: NUMBER
+        sample_values:
+          - '178641.47'
+          - '123250.00'
+          - '495917.27'
+      - name: NEW_ARR
+        description: New Annual Recurring Revenue sourced from partners.
+        expr: NEW_ARR
+        data_type: NUMBER
+        sample_values:
+          - '357515.04'
+          - '276853.00'
+          - '228667.20'
+    primary_key:
+      columns:
+        - OPPORTUNITY_ID
+relationships:
+  - name: PARTNER_DEALS_TO_PARTNER_SOURCED_PIPELINE
+    left_table: PARTNER_DEALS
+    right_table: PARTNER_SOURCED_PIPELINE
+    join_type: inner
+    relationship_type: many_to_one
+    relationship_columns:
+      - left_column: OPPORTUNITY_ID
+        right_column: OPPORTUNITY_ID
+verified_queries:
+  - name: 0;1
+    question: What is the breakdown of Google Cloud deals by stage showing the number of deals and total ARR converted?
+    sql: SELECT STAGE, COUNT(*) AS deals, SUM(NEW_ARR_CONVERTED) AS total_arr FROM partner_deals WHERE PARTNER_NAME = 'Google Cloud (TP)' GROUP BY STAGE
+    verified_at: 1773911581
+    verified_by: Semantic Model Generator
+  - name: 1;1
+    question: What is the closed ARR by quarter for partner deals?
+    sql: SELECT FISCAL_QUARTER, SUM(NEW_ARR_CONVERTED) AS closed_arr FROM partner_deals GROUP BY FISCAL_QUARTER ORDER BY FISCAL_QUARTER
+    verified_at: 1773911581
+    verified_by: Semantic Model Generator
+  - name: 2;1
+    question: What is the average deal probability for each partner?
+    sql: SELECT PARTNER_NAME, AVG(PROBABILITY) AS avg_probability FROM partner_sourced_pipeline GROUP BY PARTNER_NAME ORDER BY avg_probability DESC
+    verified_at: 1773911581
+    verified_by: Semantic Model Generator
+  - name: 3;1
+    question: How are partner deals distributed across different stages?
+    sql: SELECT STAGE, COUNT(*) AS deal_count FROM partner_deals GROUP BY STAGE ORDER BY deal_count DESC
+    verified_at: 1773911581
+    verified_by: Semantic Model Generator
+  - name: 4;1
+    question: What is the total pipeline revenue by region?
+    sql: SELECT REGION, SUM(NEW_ARR) AS pipeline_arr FROM partner_sourced_pipeline GROUP BY REGION ORDER BY pipeline_arr DESC
+    verified_at: 1773911581
+    verified_by: Semantic Model Generator
+  - name: 5;1
+    question: Which are the top 3 partners by ARR growth?
+    sql: SELECT PARTNER_NAME, SUM(ARR_DELTA) AS total_arr_growth FROM partner_sourced_pipeline GROUP BY PARTNER_NAME ORDER BY total_arr_growth DESC LIMIT 3
+    verified_at: 1773911581
+    verified_by: Semantic Model Generator
